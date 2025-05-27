@@ -1,8 +1,8 @@
 <?php
 /**
- * Theme Name:       Future In Practice Theme
+ * Theme Name:       AfzaliWP Boilerplate Theme
  * Author:           Mohammad Afzali
- * Author URI:       https://digitalmentorx.com
+ * Author URI:       https://afzaliwp.com
  */
 
 namespace AfzaliWP\Theme;
