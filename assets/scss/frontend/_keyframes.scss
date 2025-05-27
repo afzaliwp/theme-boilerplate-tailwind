@@ -1,0 +1,11 @@
+/* rtl:begin:ignore */
+@keyframes stick-header-animation {
+	from {
+		transform: translateY(-100%);
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+/* rtl:end:ignore */
