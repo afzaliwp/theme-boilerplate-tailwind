@@ -22,11 +22,11 @@ const sass = gulpSass( dartSass );
 
 const paths = {
     styles: {
-        src: 'assets/scss/frontend/frontend.css',
+        src: 'assets/css/frontend/frontend.css',
         dest: 'assets/dist'
     },
     adminStyles: {
-        src: 'assets/scss/admin/admin.css',
+        src: 'assets/css/admin/admin.css',
         dest: 'assets/dist'
     },
     scripts: {
@@ -43,11 +43,11 @@ const paths = {
 
 const watchPath = {
     styles: {
-        src: 'assets/scss/frontend/frontend.css',
+        src: 'assets/css/frontend/frontend.css',
         dest: 'assets/dist'
     },
     adminStyles: {
-        src: 'assets/scss/admin/admin.css',
+        src: 'assets/css/admin/admin.css',
         dest: 'assets/dist'
     },
     scripts: {
