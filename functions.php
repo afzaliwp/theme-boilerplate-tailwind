@@ -8,7 +8,6 @@
 namespace AfzaliWP\Theme;
 
 use AfzaliWP\Theme\Includes\Cache_Handler;
-use AfzaliWP\Theme\Includes\Load_More;
 use AfzaliWP\Theme\Includes\WP_Hooks;
 use AfzaliWP\Theme\Includes\ShortCodes\Load as Load_ShortCodes;
 
