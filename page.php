@@ -5,20 +5,13 @@
 
 get_header();
 ?>
-
-	<div id="primary" class="content-area container mx-auto px-4 py-10 max-w-3xl">
-		<main id="main" class="site-main">
-			<?php
-			// Start the Loop.
-			while (have_posts()) :
-				the_post();
-
-				get_template_part('template-parts/page/content', 'page');
-
-			endwhile; // End the loop.
-			?>
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main space-y-12">
+			<div class="page-template space-y-10 overflow-hidden mb-12">
+				<?php the_content(); ?>
+			</div>
+		</main>
+	</div>
 
 <?php
 get_sidebar();

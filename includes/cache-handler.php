@@ -13,13 +13,13 @@ class Cache_Handler {
 	}
 
 	public function handle_clear_cache() {
-		if ( ! isset( $_GET[ 'kharazmi_clear_cache' ] ) ) {
+		if ( ! isset( $_GET[ 'afzaliwp_clear_cache' ] ) ) {
 			return;
 		}
 
 		// Verify nonce and permissions
 		if ( ! current_user_can( 'manage_options' ) ||
-		     ! wp_verify_nonce( $_GET[ '_wpnonce' ], 'kharazmi_clear_cache_nonce' ) ) {
+		     ! wp_verify_nonce( $_GET[ '_wpnonce' ], 'afzaliwp_clear_cache_nonce' ) ) {
 			wp_die( 'Permission denied.' );
 		}
 
@@ -30,8 +30,8 @@ class Cache_Handler {
 			"SELECT option_name FROM $wpdb->options 
             WHERE option_name LIKE %s 
             OR option_name LIKE %s",
-			'_transient_kharazmi%',
-			'_transient_timeout_kharazmi%'
+			'_transient_afzaliwp%',
+			'_transient_timeout_afzaliwp%'
 		) );
 
 		foreach ( $transients as $transient ) {
@@ -46,8 +46,8 @@ class Cache_Handler {
 				"SELECT meta_key FROM $wpdb->sitemeta 
                 WHERE meta_key LIKE %s 
                 OR meta_key LIKE %s",
-				'_site_transient_kharazmi%',
-				'_site_transient_timeout_kharazmi%'
+				'_site_transient_afzaliwp%',
+				'_site_transient_timeout_afzaliwp%'
 			) );
 
 			foreach ( $network_transients as $transient ) {
@@ -58,9 +58,9 @@ class Cache_Handler {
 
 		// Redirect with success parameter and clean URL
 		wp_safe_redirect( add_query_arg(
-			'kharazmi_cache_cleared',
+			'afzaliwp_cache_cleared',
 			'1',
-			remove_query_arg( [ 'kharazmi_clear_cache', '_wpnonce' ] )
+			remove_query_arg( [ 'afzaliwp_clear_cache', '_wpnonce' ] )
 		) );
 		exit;
 	}
@@ -71,17 +71,17 @@ class Cache_Handler {
 		}
 
 		$admin_bar->add_node( [
-			'id'    => 'kharazmi-clear-cache',
-			'title' => 'پاک کردن کش قالب',
+			'id'    => 'mentorx-clear-cache',
+			'title' => 'Clear Theme Cache',
 			'href'  => add_query_arg( [
-				'kharazmi_clear_cache' => '1',
-				'_wpnonce'             => wp_create_nonce( 'kharazmi_clear_cache_nonce' )
+				'afzaliwp_clear_cache' => '1',
+				'_wpnonce'             => wp_create_nonce( 'afzaliwp_clear_cache_nonce' )
 			] )
 		] );
 	}
 
 	public function show_clear_cache_notice() {
-		if ( ! empty( $_GET[ 'kharazmi_cache_cleared' ] ) && current_user_can( 'manage_options' ) ) {
+		if ( ! empty( $_GET[ 'afzaliwp_cache_cleared' ] ) && current_user_can( 'manage_options' ) ) {
 			echo '<div class="notice notice-success is-dismissible"><p>'
 			     . 'کش با موفقیت پاک شد.'
 			     . '</p></div>';

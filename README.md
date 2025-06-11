@@ -1,4 +1,4 @@
-# theme-boilerplate-tailwind
+# AfzaliWP Tailwind Boilerplate Theme
  Run npm install if cloning the repo.
  
  Run gulp or npx gulp to render assets
@@ -12,4 +12,3 @@
  ```npx gulp``` to make a release and render all assets
  
  ```npx gulp watch``` to make it ready for development and render assets on each scss and js change
-# theme-boilerplate-tailwind

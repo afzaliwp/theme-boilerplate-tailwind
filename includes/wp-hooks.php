@@ -9,7 +9,6 @@ class WP_Hooks {
 		add_filter( 'upload_mimes', [ $this, 'allow_admin_svg_upload' ] );
 		add_filter( 'wp_check_filetype_and_ext', [ $this, 'fix_svg_mime_type' ], 10, 4 );
 		add_filter( 'wp_handle_upload_prefilter', [ $this, 'sanitize_svg' ] );
-		add_action( 'pre_get_posts', [ $this, 'handle_blog_filters' ] );
 	}
 
 	public function allow_admin_svg_upload( $mimes ) {
@@ -40,22 +39,5 @@ class WP_Hooks {
 		}
 
 		return $file;
-	}
-
-	function handle_blog_filters( $query ) {
-		if ( $query->is_home() && $query->is_main_query() ) {
-			if ( isset( $_GET[ 'search_posts' ] ) ) {
-				$query->set( 's', sanitize_text_field( $_GET[ 'search_posts' ] ) );
-			}
-
-			if ( isset( $_GET[ 'post_tag' ] ) ) {
-				$tags = array_map( 'sanitize_title', explode( ',', $_GET[ 'post_tag' ] ) );
-				$query->set( 'tag', implode( ',', $tags ) );
-			}
-
-			$order = ( isset( $_GET[ 'sort_date' ] ) && $_GET[ 'sort_date' ] === 'oldest' ) ? 'ASC' : 'DESC';
-			$query->set( 'orderby', 'date' );
-			$query->set( 'order', $order );
-		}
 	}
 }

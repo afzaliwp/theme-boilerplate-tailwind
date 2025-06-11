@@ -1,13 +1,14 @@
 <?php
 /**
- * Theme Name:       AfzaliWP Boilerplate Theme
+ * Theme Name:       AfzaliWP Tailwind Theme
  * Author:           Mohammad Afzali
- * Author URI:       https://afzaliwp.com
+ * Author URI:       https://digitalmentorx.com
  */
 
 namespace AfzaliWP\Theme;
 
 use AfzaliWP\Theme\Includes\Cache_Handler;
+use AfzaliWP\Theme\Includes\Load_More;
 use AfzaliWP\Theme\Includes\WP_Hooks;
 use AfzaliWP\Theme\Includes\ShortCodes\Load as Load_ShortCodes;
 
@@ -80,7 +81,7 @@ final class Theme {
 		add_theme_support( 'customize-selective-refresh-widgets' );
 		add_theme_support( 'automatic-feed-links' );
 
-		add_image_size( '70x', 70, '', false ); // 70px width, auto height
+//		add_image_size( '70x', 70, '', false ); // 70px width, auto height
 	}
 
 	public function register_menus() {
@@ -93,44 +94,44 @@ final class Theme {
 
 	public function register_styles_and_scripts() {
 		wp_enqueue_style(
-			'afz-theme-style',
-			FUTURE_THEME_ASSETS_URL . 'frontend.min.css',
+			'afzaliwp-theme-style',
+			AFZ_THEME_ASSETS_URL . 'frontend.min.css',
 			'',
-			FUTURE_THEME_ASSETS_VERSION
+			AFZ_THEME_ASSETS_VERSION
 		);
 
 		wp_enqueue_script(
-			'afz-theme-script',
-			FUTURE_THEME_ASSETS_URL . 'frontend.min.js',
+			'afzaliwp-theme-script',
+			AFZ_THEME_ASSETS_URL . 'frontend.min.js',
 			[ 'jquery' ],
-			FUTURE_THEME_ASSETS_VERSION,
+			AFZ_THEME_ASSETS_VERSION,
 			''
 		);
 
 		wp_localize_script(
-			'afz-theme-script',
-			'MXGObj',
+			'afzaliwp-theme-script',
+			'AfzObj',
 			[
 				'homeUrl' => get_bloginfo( 'url' ),
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => wp_create_nonce( 'afz-theme-nonce' ),
+				'nonce'   => wp_create_nonce( 'afzaliwp-theme-nonce' ),
 			]
 		);
 	}
 
 	public function define_constants() {
-		define( 'FUTURE_THEME_DIR', trailingslashit( get_template_directory() ) );
-		define( 'FUTURE_THEME_URL', trailingslashit( get_template_directory_uri() ) );
-		define( 'FUTURE_THEME_INC_DIR', trailingslashit( get_template_directory() ) . 'includes/' );
-		define( 'FUTURE_THEME_ASSETS_URL', trailingslashit( FUTURE_THEME_URL . 'assets/dist' ) );
-		define( 'FUTURE_THEME_IMAGES', trailingslashit( FUTURE_THEME_URL . 'assets/images' ) );
+		define( 'AFZ_THEME_DIR', trailingslashit( get_template_directory() ) );
+		define( 'AFZ_THEME_URL', trailingslashit( get_template_directory_uri() ) );
+		define( 'AFZ_THEME_INC_DIR', trailingslashit( get_template_directory() ) . 'includes/' );
+		define( 'AFZ_THEME_ASSETS_URL', trailingslashit( AFZ_THEME_URL . 'assets/dist' ) );
+		define( 'AFZ_THEME_IMAGES', trailingslashit( AFZ_THEME_URL . 'assets/images' ) );
 
 		if ( str_contains( get_bloginfo( 'wpurl' ), 'local' ) ) {
-			define( 'FUTURE_THEME_IS_LOCAL', true );
-			define( 'FUTURE_THEME_ASSETS_VERSION', time() );
+			define( 'AFZ_THEME_IS_LOCAL', true );
+			define( 'AFZ_THEME_ASSETS_VERSION', time() );
 		} else {
-			define( 'FUTURE_THEME_IS_LOCAL', false );
-			define( 'FUTURE_THEME_ASSETS_VERSION', '0.0.1' );
+			define( 'AFZ_THEME_IS_LOCAL', false );
+			define( 'AFZ_THEME_ASSETS_VERSION', '1.0.0' );
 		}
 	}
 

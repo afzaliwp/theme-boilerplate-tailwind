@@ -11,8 +11,17 @@ class Header {
 	}
 
 	public function get_action_button() {
-		return [
-			'link' => Helper::get_option( 'store_link' )
+		$cache = Helper::get_transient( 'header_action_button');
+		if ( false !== $cache ) {
+			return $cache;
+		}
+		$data = [
+			'label' => Helper::get_option( 'action_button_label' ),
+			'link' => Helper::get_option( 'action_button_link' ),
 		];
+
+		Helper::set_transient( 'header_action_button', $data);
+
+		return $data;
 	}
 }

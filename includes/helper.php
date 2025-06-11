@@ -8,10 +8,26 @@ defined( 'ABSPATH' ) || die();
 
 class Helper {
 
-	public static function get_logo( $size = 'thumbnail' ) {
-		$link = self::get_option( 'site_logo' )[ 'sizes' ][ $size ];
+	public static function get_logo( $size = 'full', $classes = '' ) {
+		$id   = self::get_option( 'site_logo' );
+		$link = wp_get_attachment_image_url( $id, $size, false );
 
-		return '<div class="site-logo w-fit-content d-flex align-items-center justify-content-center rounded-circle"><a href="'.home_url().'"><img src="' . $link . '" alt="خوارزمی"></a></div>';
+		return '<div class="site-logo ' . esc_attr( $classes ) . '"><a href="' . home_url() . '"><img width="130" src="' . $link . '" alt="' . get_bloginfo( 'description' ) . '"></a></div>';
+	}
+
+	public static function set_transient( $transient_key, $value, $expiration = DAY_IN_SECONDS ) {
+		$transient_key = 'afzaliwp_' . $transient_key;
+		set_transient( $transient_key, $value, $expiration );
+	}
+
+	public static function get_transient( $transient_key ) {
+		$transient_key = 'afzaliwp_' . $transient_key;
+
+		if ( AFZ_THEME_IS_LOCAL ) {
+			delete_transient( $transient_key );
+		}
+
+		return get_transient( $transient_key );
 	}
 
 	public static function get_the_thumbnail( $post_id, $size = 'post-thumbnail', $attr = [] ) {
@@ -22,7 +38,7 @@ class Helper {
 			return $thumbnail;
 		}
 
-		$placeholder_image_url = FUTURE_THEME_IMAGES . 'placeholder-image.webp';
+		$placeholder_image_url = AFZ_THEME_IMAGES . 'placeholder-image.webp';
 
 		return sprintf(
 			'<img src="%s" class="placeholder-img card-img-top img-thumbnail" alt="placeholder image" decoding="async">',
@@ -49,7 +65,7 @@ class Helper {
 		// Check if the reading time is already calculated and saved in post meta
 		$reading_time = get_post_meta( $post_id, 'reading_time', true );
 		if ( $reading_time ) {
-			return sprintf( $pattern, $reading_time, 'دقیقه' );
+			return sprintf( $pattern, $reading_time, 'mins' );
 		}
 		$content = $post_content ?: get_post_field( 'post_content', $post_id );
 		$content = strip_shortcodes( $content );
@@ -81,7 +97,7 @@ class Helper {
 
 		$pattern = $pattern ?: '%1$s %2$s';
 
-		return sprintf( $pattern, $m, 'دقیقه' );
+		return sprintf( $pattern, $m, 'mins' );
 	}
 
 	public static function get_pagination() {
@@ -121,7 +137,7 @@ class Helper {
 	}
 
 	public static function get_assets_images_url( $name ) {
-		return FUTURE_THEME_IMAGES . $name;
+		return AFZ_THEME_IMAGES . $name;
 	}
 
 	public static function get_page_full_url( $ignore_query_arg = false ) {
@@ -161,7 +177,7 @@ class Helper {
 		if ( ! $text ) {
 			return false;
 		}
-		$en_numbers   = range( 0, 9 );
+		$en_numbers = range( 0, 9 );
 		$fa_numbers = [ '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' ];
 
 		return str_replace( $en_numbers, $fa_numbers, $text );
@@ -270,7 +286,7 @@ class Helper {
 		$tax_query = []
 	) {
 
-		$cached_ids = get_transient( $transient_key );
+		$cached_ids = self::get_transient( $transient_key );
 
 		if ( false !== $cached_ids ) {
 			return $cached_ids;
@@ -317,9 +333,10 @@ class Helper {
 		return $combined_ids;
 	}
 
-	public static function remove_page_segment($url) {
+	public static function remove_page_segment( $url ) {
 		// Use regex to match and remove the /page/{pagenumber} segment
-		$cleaned_url = preg_replace('/\/page\/\d+/', '', $url);
+		$cleaned_url = preg_replace( '/\/page\/\d+/', '', $url );
+
 		return $cleaned_url;
 	}
 }

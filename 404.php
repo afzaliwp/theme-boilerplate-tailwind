@@ -7,7 +7,7 @@ use AfzaliWP\Theme\Includes\Helper;
 
 get_header(); ?>
 
-	<div id="primary" class="content-area container mx-auto px-4 py-12 max-w-7xl">
+	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
 			<section class="error-404 not-found flex items-center justify-center">

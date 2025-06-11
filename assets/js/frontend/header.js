@@ -1,5 +1,3 @@
-import Swiper from "swiper";
-
 class Header {
 
 	selectors = {

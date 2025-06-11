@@ -26,7 +26,7 @@ const paths = {
         dest: 'assets/dist'
     },
     adminStyles: {
-        src: 'assets/scss/admin/admin.scss',
+        src: 'assets/scss/admin/admin.css',
         dest: 'assets/dist'
     },
     scripts: {
@@ -43,11 +43,11 @@ const paths = {
 
 const watchPath = {
     styles: {
-        src: 'assets/scss/frontend/**/*.scss',
+        src: 'assets/scss/frontend/frontend.css',
         dest: 'assets/dist'
     },
     adminStyles: {
-        src: 'assets/scss/admin/**/*.scss',
+        src: 'assets/scss/admin/admin.css',
         dest: 'assets/dist'
     },
     scripts: {
@@ -168,18 +168,18 @@ function release() {
         '!wpcs/**',
         '!*.{lock,json,xml,js,yml}',
     ] )
-               .pipe( gulp.dest( 'release/afzaliwp-theme', {mode: '0755'} ) );
+               .pipe( gulp.dest( 'release/afzaliwp-boilerplate-theme', {mode: '0755'} ) );
 }
 
 function releaseZip() {
     return gulp.src( [
         'release/**',
     ] )
-               .pipe( zip( 'afzaliwp-theme.zip' ) )
+               .pipe( zip( 'afzaliwp-boilerplate-theme.zip' ) )
         // eslint-disable-next-line no-undef
                .pipe( gulp.dest( './' ).on( 'end', () => {
-                   // Move files from release/afzaliwp-theme to release/
-                   gulp.src( 'release/afzaliwp-theme/**' )
+                   // Move files from release/afzaliwp-boilerplate-theme to release/
+                   gulp.src( 'release/afzaliwp-boilerplate-theme/**' )
                        .pipe( gulp.dest( 'release' ).on( 'end', () => deleteAsync( 'release' ) ) );
                } ) );
 }
