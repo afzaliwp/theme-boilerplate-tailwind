@@ -28,7 +28,7 @@ $logo = Helper::get_logo('full', 'w-[133px] h-[60px] order-1');
 			</nav>
 			<div class="flex flex-row gap-2 order-2 md:order-3">
 				<a href="<?php echo esc_url(Helper::get_field('linkedin')); ?>" class="text-24px">
-					<i class="mx-icon mx-linkedin"></i>
+					<i class="afz-icon afz-linkedin"></i>
 				</a>
 			</div>
 		</div>

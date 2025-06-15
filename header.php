@@ -25,7 +25,7 @@ wp_head();
 			</div>
 
 			<button type="button" class="flex md:hidden items-center" id="openSidebar">
-				<i class="mx-icon mx-bars text-primary-500 text-[36px]"></i>
+				<i class="afz-icon afz-bars text-primary-500 text-[36px]"></i>
 			</button>
 
 			<nav class="hidden md:flex">
@@ -61,7 +61,7 @@ wp_head();
 				<?php echo $logo; ?>
 			</div>
 			<button type="button" class="text-primary-500 text-[36px]" id="closeSidebar">
-				<i class="mx-icon mx-cross text-primary-500"></i>
+				<i class="afz-icon afz-cross text-primary-500"></i>
 			</button>
 		</div>
 

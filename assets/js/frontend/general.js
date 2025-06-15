@@ -35,7 +35,7 @@ class General {
 				arrowBox.className = 'arrow-box';
 
 				const arrowIcon = document.createElement( 'i' );
-				arrowIcon.className = 'mx-icon mx-arrow-right text-h5-reg text-natural-white-500';
+				arrowIcon.className = 'afz-icon afz-arrow-right text-h5-reg text-natural-white-500';
 
 				arrowBox.appendChild( arrowIcon );
 				button.appendChild( arrowBox );
